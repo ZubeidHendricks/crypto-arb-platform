@@ -1,1 +1,7 @@
-aW1wb3J0IGRvdGVudiBmcm9tICdkb3RlbnYnOwppbXBvcnQgeyBBcmJpdHJhZ2VQbGF0Zm9ybSB9IGZyb20gJy4vcGxhdGZvcm0nOwoKZG90ZW52LmNvbmZpZygpOwoKY29uc3QgcGxhdGZvcm0gPSBuZXcgQXJiaXRyYWdlUGxhdGZvcm0oKTsKcGxhdGZvcm0uc3RhcnQoKS5jYXRjaChjb25zb2xlLmVycm9yKTs=
+import dotenv from 'dotenv';
+import { ArbitragePlatform } from './platform';
+
+dotenv.config();
+
+const platform = new ArbitragePlatform();
+platform.start().catch(console.error);
