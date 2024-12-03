@@ -1,13 +1,13 @@
-import ccxt from 'ccxt';
+import * as ccxt from 'ccxt';
 
 export class ExchangeManager {
   private exchanges: Map<string, ccxt.Exchange> = new Map();
 
   async initializeExchanges() {
-    const exchangeNames = ['binance', 'kraken', 'coinbase'];
+    const exchanges = ['binance', 'kraken', 'coinbase'];
     
-    for (const name of exchangeNames) {
-      const exchange = new ccxt[name]({
+    for (const name of exchanges) {
+      const exchange = new (ccxt as any)[name]({
         enableRateLimit: true
       });
       this.exchanges.set(name, exchange);
@@ -19,6 +19,7 @@ export class ExchangeManager {
     for (const [name, exchange] of this.exchanges) {
       try {
         const ticker = await exchange.fetchTicker(symbol);
+        console.log(`${name}: ${ticker.last}`);
         prices.set(name, ticker.last);
       } catch (error) {
         console.error(`Error fetching ${symbol} price from ${name}:`, error);
